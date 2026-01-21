@@ -1,15 +1,15 @@
-class Library:
-    def __init__(self):
-        # In-memory storage for books
-        self.books = {}
+    def borrow_book(self, book_id):
+        if book_id not in self.books:
+            raise ValueError("Book not found")
 
-    def add_book(self, book_id, title, author):
-        if book_id in self.books:
-            raise ValueError("Book ID already exists")
+        if self.books[book_id]["status"] == "Borrowed":
+            raise ValueError("Book already borrowed")
 
-        self.books[book_id] = {
-            "title": title,
-            "author": author,
-            "status": "Available"
-        }
+        self.books[book_id]["status"] = "Borrowed"
+
+    def return_book(self, book_id):
+        if book_id not in self.books:
+            raise ValueError("Book not found")
+
+        self.books[book_id]["status"] = "Available"
 

@@ -1,15 +1,6 @@
-    def borrow_book(self, book_id):
-        if book_id not in self.books:
-            raise ValueError("Book not found")
-
-        if self.books[book_id]["status"] == "Borrowed":
-            raise ValueError("Book already borrowed")
-
-        self.books[book_id]["status"] = "Borrowed"
-
-    def return_book(self, book_id):
-        if book_id not in self.books:
-            raise ValueError("Book not found")
-
-        self.books[book_id]["status"] = "Available"
+    def generate_report(self):
+        report = "Book ID | Title | Author | Status\n"
+        for book_id, details in self.books.items():
+            report += f"{book_id} | {details['title']} | {details['author']} | {details['status']}\n"
+        return report
 

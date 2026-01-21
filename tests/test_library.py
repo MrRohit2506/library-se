@@ -1,20 +1,14 @@
-class TestSprint2(unittest.TestCase):
+class TestSprint3(unittest.TestCase):
 
     def setUp(self):
         self.library = Library()
         self.library.add_book("B1", "Python", "Guido")
 
-    def test_borrow_book(self):
-        self.library.borrow_book("B1")
-        self.assertEqual(self.library.books["B1"]["status"], "Borrowed")
+    def test_report_header(self):
+        report = self.library.generate_report()
+        self.assertIn("Book ID | Title | Author | Status", report)
 
-    def test_borrow_unavailable(self):
-        self.library.borrow_book("B1")
-        with self.assertRaises(ValueError):
-            self.library.borrow_book("B1")
-
-    def test_return_book(self):
-        self.library.borrow_book("B1")
-        self.library.return_book("B1")
-        self.assertEqual(self.library.books["B1"]["status"], "Available")
+    def test_report_contains_book(self):
+        report = self.library.generate_report()
+        self.assertIn("B1", report)
 
